@@ -9,8 +9,6 @@ import SignUp from './assets/components/SignUp';
 //css import
 import './App.css'
 
-
-
 function App() {
 
   return (
