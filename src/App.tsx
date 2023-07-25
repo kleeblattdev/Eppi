@@ -6,6 +6,9 @@ import Table from './assets/components/Table'
 import Header from './assets/components/Header'
 import SignUp from './assets/components/SignUp';
 
+//
+import { Toaster } from "@/components/ui/toaster"
+
 //css import
 import './App.css'
 
@@ -19,6 +22,7 @@ function App() {
       <Route path='/' element={<Table/>}/>
       <Route path='/signUp' element= {<SignUp/>}/>
     </Routes>
+    <Toaster/>
     </BrowserRouter>
     </>
   )
