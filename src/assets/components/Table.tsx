@@ -1,12 +1,20 @@
 //library import
-import { flexRender, useReactTable, getCoreRowModel, getSortedRowModel } from '@tanstack/react-table';
-import { useMemo } from 'react';
+import { 
+    flexRender,
+    useReactTable,
+    getCoreRowModel,
+    getSortedRowModel,
+    getPaginationRowModel,
+ } from '@tanstack/react-table';
+import { useMemo, useState } from 'react';
 
 //Data import
 import mockData from '../../data.json';
 
 
 const Table = () =>{
+    const [sorting, setSorting] =useState([])
+
     const data = useMemo(()=> mockData,[])
 
 const columns = [
@@ -42,11 +50,16 @@ const columns = [
 ]
 
     const table = useReactTable({
-        data,
-        columns,
-        getCoreRowModel: getCoreRowModel(),
-    getSortedRowModel: getSortedRowModel()}
-    )
+    data,
+    columns,
+    getCoreRowModel: getCoreRowModel(),
+    getSortedRowModel: getSortedRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
+    state: {
+        sorting: sorting
+    },
+    onSortingChange: setSorting,
+})
 
     return(
 <main>
@@ -56,8 +69,9 @@ const columns = [
         {table.getHeaderGroups().map(headerGroup =>(
             <tr key={headerGroup.id}>
                 {headerGroup.headers.map(header=>(
-                    <th key={header.id}>
+                    <th key={header.id} onClick={header.column.getToggleSortingHandler()}>
                         {flexRender(header.column.columnDef.header, header.getContext())}
+                        {{asc: '⬆️', desc:'⬇️'}[header.column.getIsSorted()?? null]}
                     </th>
                 ))}
             </tr>
@@ -75,6 +89,12 @@ const columns = [
             ))}
         </tbody>
     </table>
+    <div>
+        <button onClick={()=> table.setPageIndex(0)}>First Page</button>
+        <button disabled={!table.getCanPreviousPage()} onClick={()=> table.previousPage()}>Previous Page</button>
+        <button disabled={!table.getCanNextPage()} onClick={()=> table.nextPage()}>Next Page</button>
+        <button onClick={()=>table.setPageIndex(table.getPageCount()-1)}>Last Page</button>
+    </div>
 </main>
     )
 }
