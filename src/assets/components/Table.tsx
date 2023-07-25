@@ -13,11 +13,21 @@ import { useMemo, useState } from 'react';
 //Data import
 import mockData from '../../data.json';
 
+//
+import {
+    Table,
+    TableBody,
+    TableCell,
+    TableHead,
+    TableHeader,
+    TableRow,
+  } from "@/components/ui/table"
+
 /**
  * A table that displays data and provides sorting and pagination functionality.
  **/ 
  
-const Table = () =>{
+const TablePage = () =>{
 
     //define the type for data
     type TData={
@@ -85,33 +95,32 @@ const Table = () =>{
 
     return(
 <main>
-    <h1>Table</h1>
-    <table>
-        <thead>
+    <Table>
+        <TableHeader>
         {table.getHeaderGroups().map(headerGroup =>(
-            <tr key={headerGroup.id}>
+            <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map(header=>(
-                    <th key={header.id} onClick={header.column.getToggleSortingHandler()}>
+                    <TableHead key={header.id} onClick={header.column.getToggleSortingHandler()}>
                         {header.isPlaceholder ? null :
                         flexRender(header.column.columnDef.header, header.getContext())}
                         {{asc: '⬆️', desc:'⬇️'}[[header.column.getIsSorted() as string]?? null]}
-                    </th>
+                    </TableHead>
                 ))}
-            </tr>
+            </TableRow>
         ))}
-        </thead>
-        <tbody>
+        </TableHeader>
+        <TableBody>
             {table.getRowModel().rows.map(row =>(
-                <tr key={row.id}>
+                <TableRow key={row.id}>
                     {row.getVisibleCells().map(cell =>(
-                        <td key={cell.id}>
+                        <TableCell key={cell.id}>
                             {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                        </td>
+                        </TableCell>
                     ))}
-                </tr>
+                </TableRow>
             ))}
-        </tbody>
-    </table>
+        </TableBody>
+    </Table>
     {/* Pagination buttons */}
     <div>
         <button onClick={()=> table.setPageIndex(0)}>First Page</button>
@@ -123,4 +132,4 @@ const Table = () =>{
     )
 }
 
-export default Table;
+export default TablePage;
