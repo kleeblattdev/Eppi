@@ -37,6 +37,7 @@ const columns = [
     {
         header: 'Color',
         accessorKey: 'color',
+        cell: (info: { getValue: () => any; }) => <div className='colorBlock' style={{backgroundColor:info.getValue()}}></div>
     },
 ]
 
