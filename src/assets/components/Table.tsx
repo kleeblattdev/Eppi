@@ -6,18 +6,38 @@ import {
     getSortedRowModel,
     getPaginationRowModel,
  } from '@tanstack/react-table';
+
+//hook import
 import { useMemo, useState } from 'react';
 
 //Data import
 import mockData from '../../data.json';
 
-
+/**
+ * A table that displays data and provides sorting and pagination functionality.
+ **/ 
+ 
 const Table = () =>{
-    const [sorting, setSorting] =useState([])
 
-    const data = useMemo(()=> mockData,[])
+    //define the type for data
+    type TData={
+        id: number,
+        location: string,
+        type: string,
+        device_health: string,
+        last_used: string,
+        price: string,
+        color: string,
+    }
 
-const columns = [
+    // state to manage the sorting configuration of the table
+    const [sorting, setSorting] = useState<{ id: string; desc: boolean }[]>([]);
+
+    // Memoized data to improve performance when data doesn't change
+    const data:TData[] = useMemo(()=> mockData,[])
+
+    //column configuration
+    const columns = [
     {
         header: 'ID',
         accessorKey: 'id',
@@ -45,21 +65,23 @@ const columns = [
     {
         header: 'Color',
         accessorKey: 'color',
+        //custom cell rendering
         cell: (info: { getValue: () => any; }) => <div className='colorBlock' style={{backgroundColor:info.getValue()}}></div>
     },
 ]
 
-    const table = useReactTable({
-    data,
-    columns,
-    getCoreRowModel: getCoreRowModel(),
-    getSortedRowModel: getSortedRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
-    state: {
-        sorting: sorting
-    },
-    onSortingChange: setSorting,
-})
+    //create the table with useReactTable hook
+    const table = useReactTable<TData>({
+        data,
+        columns,
+        getCoreRowModel: getCoreRowModel(),
+        getSortedRowModel: getSortedRowModel(),
+        getPaginationRowModel: getPaginationRowModel(),
+        state: {
+            sorting: sorting,
+        },
+        onSortingChange: setSorting,
+    });
 
     return(
 <main>
@@ -70,8 +92,9 @@ const columns = [
             <tr key={headerGroup.id}>
                 {headerGroup.headers.map(header=>(
                     <th key={header.id} onClick={header.column.getToggleSortingHandler()}>
-                        {flexRender(header.column.columnDef.header, header.getContext())}
-                        {{asc: '⬆️', desc:'⬇️'}[header.column.getIsSorted()?? null]}
+                        {header.isPlaceholder ? null :
+                        flexRender(header.column.columnDef.header, header.getContext())}
+                        {{asc: '⬆️', desc:'⬇️'}[[header.column.getIsSorted() as string]?? null]}
                     </th>
                 ))}
             </tr>
@@ -89,6 +112,7 @@ const columns = [
             ))}
         </tbody>
     </table>
+    {/* Pagination buttons */}
     <div>
         <button onClick={()=> table.setPageIndex(0)}>First Page</button>
         <button disabled={!table.getCanPreviousPage()} onClick={()=> table.previousPage()}>Previous Page</button>
@@ -100,45 +124,3 @@ const columns = [
 }
 
 export default Table;
-
-/*     //Define the row shape
-type Data={
-    id: number,
-    location: string,
-    type: string,
-    device_health: string,
-    last_used: string,
-    price: string,
-    color: string,
-}
-
-const columnHelper = createColumnHelper<Data>()
-
-const defaultColumns = [
-    //display column
-    columnHelper.accessor('id',{
-        header: 'ID',
-    }),
-    columnHelper.accessor('location',{
-        header: 'Location',
-    }),
-    columnHelper.accessor('type',{
-        header: 'Type',
-    }),
-    columnHelper.accessor('device_health',{
-        header: 'Device Health',
-    }),
-    columnHelper.accessor('last_used',{
-        header: 'Last Used',
-    }),
-    columnHelper.accessor('price',{
-        header: 'Price',
-    }),
-    columnHelper.accessor('color',{
-        header: 'Color',
-    })
-] */
-
-/* type Columns = ColumnDef<Data>[]
-
-const columns:Columns=[] */
