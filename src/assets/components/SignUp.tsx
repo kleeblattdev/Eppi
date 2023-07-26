@@ -1,5 +1,5 @@
 //hook import
-import { useState } from "react";
+//import { useState } from "react";
 
 //ui-component import
 import { Button } from "@/components/ui/button"
@@ -75,24 +75,25 @@ const SignUp = () =>{
       ];
 
       //state to store form data
-      const [formData, setFormData] = useState('')
+      //const [formData, setFormData] = useState('')
     
       //input change handler
-      const handleChange = (event: { target: { value: any; }; }) => {
+/*       const handleChange = (event) => {
         const input = event.target.value
         setFormData(input)
-      }
+      } */
 
       //function to validate form data
-      const validateFormData = () =>{
+/*       const validateFormData = () =>{
         //check if field is required but empty
         //check minimum length
         //check pattern validation
-      }
+      } */
 
       //form submit handler
       const submitHandler = () =>{
         //handle validation error and proceed with form submission
+
       }
 
     return(
@@ -107,7 +108,7 @@ const SignUp = () =>{
                             placeholder={form.label}
                             id={form.label}
                             required={form.validation?.required.value}
-                            onChange={handleChange}
+                            //onChange={handleChange}
                             />
                             </label>
                         )

@@ -101,9 +101,25 @@ const TablePage = () =>{
             <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map(header=>(
                     <TableHead key={header.id} onClick={header.column.getToggleSortingHandler()}>
-                        {header.isPlaceholder ? null :
-                        flexRender(header.column.columnDef.header, header.getContext())}
-                        {{asc: '⬆️', desc:'⬇️'}[[header.column.getIsSorted() as string]?? null]}
+                    {header.isPlaceholder ? null : (
+                      <div
+                        {...{
+                          className: header.column.getCanSort()
+                            ? 'cursor-pointer select-none'
+                            : '',
+                          onClick: header.column.getToggleSortingHandler(),
+                        }}
+                      >
+                        {flexRender(
+                          header.column.columnDef.header,
+                          header.getContext()
+                        )}
+                        {{
+                          asc: ' 🔼',
+                          desc: ' 🔽',
+                        }[header.column.getIsSorted() as string] ?? null}
+                      </div>
+                    )}
                     </TableHead>
                 ))}
             </TableRow>
