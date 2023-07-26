@@ -1,6 +1,7 @@
 # Eppendorf Frontend Challenge
 
 This is a solution for a case study.
+## Overview
 
 -[The challenge](#the-challenge)
 -[My process](#my-process)
@@ -37,7 +38,7 @@ along the process I tried to comment my code and commit after completing a task.
 
 ### What I learned
 
-In the process of completing the Eppi Frontend Challenge, I gained valuable insights and skills that enriched my development journey. Here are the key lessons I learned:
+In the process of completing the Eppendorf Frontend Challenge, I gained valuable insights and skills that enriched my development journey. Here are the key lessons I learned:
 
 Setting up a project with TypeScript was a smooth process, thanks to the extensive documentation and tools available. TypeScript provided strong type-checking and improved code quality. 
 
@@ -52,5 +53,5 @@ Overall, the Eppendorf Frontend Challenge provided me with valuable hands-on exp
 
 ## Links
 
-- Live Site URL: [Eppi-Challenge](https://singular-narwhal-719d80.netlify.app/)
+- Live Site URL: [Eppendor Frontend Challenge](https://singular-narwhal-719d80.netlify.app/)
 - Tutorial: [TanStackTable](https://www.youtube.com/watch?v=AuLg79Th3xE)
