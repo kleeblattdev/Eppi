@@ -96,13 +96,12 @@ const SignUp = () =>{
       }
 
     return(
-        <main>
+        <main className="flex items-center justify-center h-screen">
             <form onSubmit={submitHandler}>
-                <fieldset>
+                <fieldset className="flex flex-col items-end gap-5 m-4">
                     {formSchema.map((form)=>{
                         return(
-                            <label htmlFor={form.type} key={form.label}>
-                                {form.label}
+                            <label htmlFor={form.type} key={form.label} >
                             <input 
                             type={form.type}
                             placeholder={form.label}
@@ -113,8 +112,8 @@ const SignUp = () =>{
                             </label>
                         )
                     })}
-                    <Button type="submit">Sign Up</Button>
                 </fieldset>
+                <Button type="submit">Sign Up</Button>
             </form>
         </main>
     )

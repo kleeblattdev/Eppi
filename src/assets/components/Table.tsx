@@ -122,7 +122,7 @@ const TablePage = () =>{
         </TableBody>
     </Table>
     {/* Pagination buttons */}
-    <div>
+    <div className='flex justify-between m-4'>
         <button onClick={()=> table.setPageIndex(0)}>First Page</button>
         <button disabled={!table.getCanPreviousPage()} onClick={()=> table.previousPage()}>Previous Page</button>
         <button disabled={!table.getCanNextPage()} onClick={()=> table.nextPage()}>Next Page</button>

@@ -4,8 +4,10 @@ import { NavLink } from "react-router-dom";
 const Header = () =>{
     return(
         <header>
-            <NavLink to='/'>Table</NavLink>
-            <NavLink to='SignUp'>Sign Up</NavLink>
+            <nav className="flex justify-around m-2">
+                <NavLink to='/' className="text-gray-500 hover:text-black hover:underline">Table</NavLink>
+                <NavLink to='SignUp' className="text-gray-500 hover:text-black hover:underline">Sign Up</NavLink>
+            </nav>
         </header>
     )
 }
