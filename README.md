@@ -26,6 +26,7 @@ The user should be able to visualize the provided data.json file to a sortable t
 6. hard coded the sign up form
 7. built a formSchema for the sign up form
 8. added some styling with tailwind 
+9. Fixing errors for deployment
 
 along the process I tried to comment my code and commit after completing a task.
 

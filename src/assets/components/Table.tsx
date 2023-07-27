@@ -13,7 +13,7 @@ import { useMemo, useState } from 'react';
 //Data import
 import mockData from '../../data.json';
 
-//
+//UI component import
 import {
     Table,
     TableBody,
@@ -22,6 +22,7 @@ import {
     TableHeader,
     TableRow,
   } from "@/components/ui/table"
+import { Button } from "@/components/ui/button"
 
 /**
  * A table that displays data and provides sorting and pagination functionality.
@@ -139,10 +140,10 @@ const TablePage = () =>{
     </Table>
     {/* Pagination buttons */}
     <div className='flex justify-between m-4'>
-        <button onClick={()=> table.setPageIndex(0)}>First Page</button>
-        <button disabled={!table.getCanPreviousPage()} onClick={()=> table.previousPage()}>Previous Page</button>
-        <button disabled={!table.getCanNextPage()} onClick={()=> table.nextPage()}>Next Page</button>
-        <button onClick={()=>table.setPageIndex(table.getPageCount()-1)}>Last Page</button>
+        <Button onClick={()=> table.setPageIndex(0)}>First Page</Button>
+        <Button disabled={!table.getCanPreviousPage()} onClick={()=> table.previousPage()}>Previous Page</Button>
+        <Button disabled={!table.getCanNextPage()} onClick={()=> table.nextPage()}>Next Page</Button>
+        <Button onClick={()=>table.setPageIndex(table.getPageCount()-1)}>Last Page</Button>
     </div>
 </main>
     )
